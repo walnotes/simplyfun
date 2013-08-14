@@ -1,2 +1,9 @@
 <h1>Languages#show</h1>
 <p>Find me in app/views/languages/show.html.erb</p>
+
+Themes
+<ul>
+	<% @language.themes.each do |t| %>
+		<li><%= link_to t.name, theme_path(t) %></li>
+	<% end %>
+</ul>

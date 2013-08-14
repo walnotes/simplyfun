@@ -1,7 +1,41 @@
 SfsLanguages::Application.routes.draw do
+  resources :language_tables
+
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
+  resources :words_subthemes
+
+
+  resources :words
+
+
+  get "subtheme/show"
+
+  resources :subthemes
+
+
+  get "theme/show"
+
+  resources :themes
+
+
+  get "welcome/index"
+
   get "languages/show"
 
-  resources :languages
+  match ':language_id/:theme_id/:subtheme_id/:word_id' => 'words#show'
+
+  resources :languages do
+    resources :themes do
+      resources :subthemes do
+        resources :words
+      end
+    end
+  end
+
+
 
 
   # The priority is based upon order of creation:
@@ -53,7 +87,7 @@ SfsLanguages::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
