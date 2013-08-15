@@ -5,7 +5,12 @@ Words
 <p><%= @word.name %></p>
 <p><%= @word.name_english %></p>
 <p><%= image_tag @word.image %></p>
-<p><%= audio_tag @word.mp3 %></p>
+<p>
+	<audio controls loop style="width:400px;">
+	<source src="<%= @word.mp3 %>" type="audio/mpeg">
+	Your browser does not support the audio element.
+	</audio>
+</p>
 <p><%= link_to 'PDF', @word.pdf %></p>
 
 Other languages
