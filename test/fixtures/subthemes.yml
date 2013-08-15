@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  pdf_flashcards: MyString
+  pdf_worksheet: MyString
+  image: MyString
+  name_english: MyString
+  name: MyString
+
+two:
+  pdf_flashcards: MyString
+  pdf_worksheet: MyString
+  image: MyString
+  name_english: MyString
+  name: MyString

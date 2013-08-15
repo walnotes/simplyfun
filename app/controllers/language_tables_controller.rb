@@ -1,0 +1,2 @@
+class LanguageTablesController < ApplicationController
+end

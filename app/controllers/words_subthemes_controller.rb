@@ -1,0 +1,2 @@
+class WordsSubthemesController < ApplicationController
+end

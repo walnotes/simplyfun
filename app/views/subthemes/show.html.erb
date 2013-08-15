@@ -1,0 +1,9 @@
+<h1>Subthemes#show</h1>
+<p>Find me in app/views/subthemes/show.html.erb</p>
+
+Words
+<ul>
+	<% @subtheme.words.each do |w| %>
+		<li><%= link_to w.name_english, word_path(w) %></li>
+	<% end %>
+</ul>

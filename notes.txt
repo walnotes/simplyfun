@@ -1,0 +1,43 @@
+From subtheme to word, keep left nav (list of words)
+
+Theme Page:
+1.  List of sub themes
+2.  The full theme pdf (which is the coloring book) (pdf download top right)
+3.  An image of the theme (jpg)
+
+Sub-Theme Page:
+1.  List of words
+2.  Flashcards (pdf)
+3.  Worksheets (pdf)
+4.  An image of the sub-theme (jpg)
+
+Word Page:
+1.  Word in english
+2.  Word in other language
+3.  Word in other language (in image format for Arabic and similar languages) (jpg)
+4.  An image of the word (jpg)
+5.  An audio file of the word (mp3)
+6.  Page from the coloring book (pdf or jpg)
+
+
+Structure
+
+Language
+Theme
+Subtheme
+Word
+
+Spanish 
+	The Trip (PDF, Image)
+		Hotel (List of words, PDF Flash PDF Worksheet, Image)
+			Baño (Word in English, Word in other lang, other lang image, image, mp3, pdf)
+			Puerta
+		Trip
+			Avion
+			Coche
+
+Primary Key is english word with composite language id
+
+Think about file structure
+
+Payment Wall

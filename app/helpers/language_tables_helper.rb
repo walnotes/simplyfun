@@ -1,0 +1,2 @@
+module LanguageTablesHelper
+end

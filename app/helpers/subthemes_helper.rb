@@ -1,0 +1,2 @@
+module SubthemesHelper
+end

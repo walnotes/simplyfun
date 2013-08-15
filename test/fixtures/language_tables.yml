@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  language_id: 1
+  theme_id: 1
+  subtheme_id: 1
+  word_id: 1
+  theme: MyString
+  theme_image: MyString
+  theme_pdf: MyString
+  theme_description: MyString
+  subtheme: MyString
+  subtheme_pdf_flashcards: MyString
+  subtheme_pdf_worksheet: MyString
+  subtheme_image: MyString
+  subtheme_description: MyString
+  word: MyString
+  word_image: MyString
+  word_audio: MyString
+  word_pdf: MyString
+
+two:
+  language_id: 1
+  theme_id: 1
+  subtheme_id: 1
+  word_id: 1
+  theme: MyString
+  theme_image: MyString
+  theme_pdf: MyString
+  theme_description: MyString
+  subtheme: MyString
+  subtheme_pdf_flashcards: MyString
+  subtheme_pdf_worksheet: MyString
+  subtheme_image: MyString
+  subtheme_description: MyString
+  word: MyString
+  word_image: MyString
+  word_audio: MyString
+  word_pdf: MyString
