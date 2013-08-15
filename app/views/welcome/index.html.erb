@@ -1,2 +1,9 @@
 <h1>Welcome#index</h1>
 <p>Find me in app/views/welcome/index.html.erb</p>
+
+Languages:
+<ul>
+<% Language.all.each do |l| %>
+	<li><%= link_to l.name, language_path(l) %></li>
+<% end %>
+</ul>
