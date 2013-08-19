@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: sfs_languages_development
   pool: 5
-  username: cosmos
+  username: walter
   password:
 
 test:
@@ -11,7 +11,7 @@ test:
   encoding: unicode
   database: sfs_languages_test
   pool: 5
-  username: cosmos
+  username: walter
   password:
 
 # # SQLite version 3.x
