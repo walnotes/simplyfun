@@ -1,9 +1,17 @@
-<h1>Languages#show</h1>
-<p>Find me in app/views/languages/show.html.erb</p>
+    <div class="container">
 
-Themes
-<ul>
-	<% @language.themes.each do |t| %>
-		<li><%= link_to t.name, theme_path(t) %></li>
-	<% end %>
-</ul>
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h1>Spanish</h1>
+        <p>Select a theme</p>
+        <p>
+        	<ul>
+          	<% @language.themes.each do |t| %>
+          		<li><%= link_to t.name, theme_path(t) %></li>
+          	<% end %>
+        	</ul>
+        </p>
+      </div>
+
+    </div>
+

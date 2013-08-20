@@ -1,19 +1,26 @@
-<h1>Themes#show</h1>
-<p>Find me in app/views/themes/show.html.erb</p>
+    <div class="container">
 
-<p>
-	PDF
-	<%= @theme.pdf %>
-</p>
-<p>
-	Image
-	<%= image_tag @theme.image %>
-</p>
-<p>
-	Subthemes
-	<ul>
-		<% Subtheme.where('theme_id = ?', "#{@theme.id}").each do |s| %>
-			<li><%= link_to s.name, subtheme_path(s) %></li>
-		<% end %>
-	</ul>
-</p>
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h1>Spanish</h1>
+        <p>Select a sub-theme</p>
+        <p>
+        	<ul>
+        		<% Subtheme.where('theme_id = ?', "#{@theme.id}").each do |s| %>
+        			<li><%= link_to s.name, subtheme_path(s) %></li>
+        		<% end %>
+        	</ul>
+        </p>
+        <div style="float:right;">
+        	Theme PDF Link
+        	<%= @theme.pdf %>
+        </div>
+
+        <div class="row">
+          <div class="large-9 columns">
+          	<%= image_tag @theme.image %>
+          </div>
+        </div>
+      </div>
+
+    </div>

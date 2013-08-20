@@ -1,9 +1,17 @@
-<h1>Subthemes#show</h1>
-<p>Find me in app/views/subthemes/show.html.erb</p>
+    <div class="container">
 
-Words
-<ul>
-	<% @subtheme.words.each do |w| %>
-		<li><%= link_to w.name_english, word_path(w) %></li>
-	<% end %>
-</ul>
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h1>Spanish</h1>
+        <p>Select a word</p>
+        <p>
+        	<ul>
+          	<% @subtheme.words.each do |w| %>
+          		<li><%= link_to w.name_english, word_path(w) %></li>
+          	<% end %>
+        	</ul>
+        </p>
+      </div>
+
+    </div>
+

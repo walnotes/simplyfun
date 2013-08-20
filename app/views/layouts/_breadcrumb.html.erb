@@ -1,0 +1,13 @@
+<% if params[:controller] == 'languages' %>
+	<% language = Language.find(params[:id]) %>
+	<%= link_to language.name, language %>
+<% elsif params[:controller] == 'themes' %>
+	<% theme = Theme.find(params[:id]) %>
+	<%= link_to theme.language.name, theme.language %> > <%= link_to theme.name, theme %>
+<% elsif params[:controller] == 'subthemes' %>
+	<% subtheme = Subtheme.find(params[:id]) %>
+	<%= link_to subtheme.language.name, subtheme.language %> > <%= link_to subtheme.theme.name, subtheme.theme %> > <%= link_to subtheme.name, subtheme %>
+<% elsif params[:controller] == 'words' %>
+	<% word = Word.find(params[:id]) %>
+	<%= link_to word.language.name, word.language %> > <%= link_to word.theme.name, word.theme %> > <%= link_to word.subtheme.name, word.subtheme %> > <%= link_to word.text_original, word %>
+<% end %>
