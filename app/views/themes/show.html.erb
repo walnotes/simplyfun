@@ -1,7 +1,7 @@
     <div class="container">
 
       <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
+      <div class="hero-unit-smaller">
         <h1>Spanish</h1>
         <p>Select a sub-theme</p>
         <p>
@@ -16,11 +16,7 @@
         	<%= @theme.pdf %>
         </div>
 
-        <div class="row">
-          <div class="large-9 columns">
-          	<%= image_tag @theme.image %>
-          </div>
-        </div>
+      	<%= image_tag @theme.image, width: '400', height: '600' %>
       </div>
 
     </div>
