@@ -11,7 +11,7 @@
     	<%#= link_to subtheme.language.name, subtheme.language %> > <%= link_to subtheme.theme.name, subtheme.theme %> > <%= link_to subtheme.name, subtheme %>
     <% elsif params[:controller] == 'words' %>
     	<% word = Word.find(params[:id]) %>
-    	<%= link_to word.language.name, word.language %> > <%= link_to word.theme.name, word.theme %> > <%= link_to word.subtheme.name, word.subtheme %> > <%= link_to word.text_original, word %>
+    	 <!-- link_to word.language.name, word.language %> >  link_to word.theme.name, word.theme %> >  link_to word.subtheme.name, word.subtheme %> >  link_to word.text_original, word %> -->
     <% end %>
     </div>
   </div>
