@@ -2,8 +2,11 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit-smaller">
-        <h1>Spanish</h1>
-        <p>Select a sub-theme</p>
+      	<% theme = Theme.find(params[:id]) %>
+        <h1><%= theme.name %></h1>
+
+        <p>View the 
+        	<%= link_to 'coloring book', @theme.pdf %> or select a sub-theme</p>
         <p>
         	<ul>
         		<% Subtheme.where('theme_id = ?', "#{@theme.id}").each do |s| %>
@@ -11,12 +14,8 @@
         		<% end %>
         	</ul>
         </p>
-        <div style="float:right;">
-        	Theme PDF Link
-        	<%= @theme.pdf %>
-        </div>
-
       	<%= image_tag @theme.image, width: '400', height: '600' %>
+
       </div>
 
     </div>
