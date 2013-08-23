@@ -1,23 +1,36 @@
-<h1>Words#show</h1>
-<p>Find me in app/views/words/show.html.erb</p>
+    <div class="container">
 
-Words
-<p><%= @word.name %></p>
-<p><%= @word.name_english %></p>
-<p><%= image_tag @word.image %></p>
-<p>
-	<audio controls loop style="width:400px;">
-	<source src="<%= @word.mp3 %>" type="audio/mpeg">
-	Your browser does not support the audio element.
-	</audio>
-</p>
-<p><%= link_to 'PDF', @word.pdf %></p>
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit-smaller">
+        <h1><%= @word.name_english %></h1>
+        <p><%= @word.name %></p>
 
-Other languages
-<ul>
-	<% SubthemesWords.where('word_id = ?', @word.id).each do |s| %>
-		<li>
-			<%= Subtheme.find(s.subtheme_id).theme.language.name_english %>
-		</li>
-	<% end %>
-</ul>
+        <p>View the word
+        	<%= link_to 'pdf file', @word.pdf %> or play the audio file
+      	</p>
+        <p>
+        	<audio controls loop style="width:600px;margin-left:10px;">
+        	<source src="<%= @word.mp3 %>" type="audio/mpeg">
+        	Your browser does not support the audio element.
+        	</audio>
+        	<%#= link_to 'View the pdf file', @word.pdf %>
+        </p>
+
+        <p>
+        <%= image_tag @word.image, width: '600', height: '400' %></p>
+        </p>
+      </div>
+
+      View the same word in other languages
+      <ul>
+      	<% SubthemesWords.where('word_id = ?', @word.id).each do |s| %>
+      		<li>
+      			<%= Subtheme.find(s.subtheme_id).theme.language.name_english %>
+      		</li>
+      	<% end %>
+      </ul>
+    </div>
+
+
+
+
