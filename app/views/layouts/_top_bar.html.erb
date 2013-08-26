@@ -30,17 +30,18 @@
             </ul>
 
              <% if user_signed_in? %>
-              Logged in as <strong><%= current_user.email %></strong>.
-              <%= link_to 'Edit profile', edit_user_registration_path %> |
-              <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+              <span class='pull-right'>
+                <strong><%= current_user.email %></strong> | 
+                <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+              </span>
             <% else %>
-            <form class="navbar-form pull-right">
-            <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+            
+            <%= form_for("user", :url => user_session_path, :html => {:class => "navbar-form pull-right"}) do |f| %>
               <%= f.email_field :email, :class => 'span2', :placeholder => "Email" %>
               <%= f.password_field :password, :class => 'span2', :placeholder => "Password" %>
               <%= f.submit "Sign in", :class => 'btn' %>
             <% end %>
-            </form>
+            
             <% end %>
 
 
