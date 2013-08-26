@@ -3,6 +3,7 @@ class Word < ActiveRecord::Base
 
   belongs_to :subtheme
 
+  # validates :name, :uniqueness => true
   #belongs_to :language, :through => :theme
 
   #has_and_belongs_to_many :subthemes
