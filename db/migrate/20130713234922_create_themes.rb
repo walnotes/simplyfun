@@ -5,7 +5,8 @@ class CreateThemes < ActiveRecord::Migration
       t.string :pdf
       t.string :name_english
       t.string :name
-
+      t.integer :language_id
+      
       t.timestamps
     end
   end

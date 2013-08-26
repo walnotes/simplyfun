@@ -46,28 +46,6 @@ ActiveRecord::Schema.define(:version => 20130826003624) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
-  create_table "language_tables", :force => true do |t|
-    t.integer  "language_id"
-    t.integer  "theme_id"
-    t.integer  "subtheme_id"
-    t.integer  "word_id"
-    t.string   "theme"
-    t.string   "theme_image"
-    t.string   "theme_pdf"
-    t.string   "theme_description"
-    t.string   "subtheme"
-    t.string   "subtheme_pdf_flashcards"
-    t.string   "subtheme_pdf_worksheet"
-    t.string   "subtheme_image"
-    t.string   "subtheme_description"
-    t.string   "word"
-    t.string   "word_image"
-    t.string   "word_audio"
-    t.string   "word_pdf"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
-  end
-
   create_table "languages", :force => true do |t|
     t.string   "name_english"
     t.string   "name"
@@ -82,11 +60,11 @@ ActiveRecord::Schema.define(:version => 20130826003624) do
     t.string   "image"
     t.string   "name_english"
     t.string   "name"
+    t.integer  "theme_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.string   "description"
     t.string   "video_url"
-    t.string   "theme_id"
   end
 
   create_table "subthemes_words", :force => true do |t|
@@ -107,9 +85,9 @@ ActiveRecord::Schema.define(:version => 20130826003624) do
     t.string   "pdf"
     t.string   "name_english"
     t.string   "name"
+    t.integer  "language_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.integer  "language_id"
     t.string   "description"
   end
 
@@ -120,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20130826003624) do
     t.string   "image"
     t.string   "mp3"
     t.string   "pdf"
+    t.integer  "subtheme_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

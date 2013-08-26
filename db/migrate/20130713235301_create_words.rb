@@ -7,7 +7,8 @@ class CreateWords < ActiveRecord::Migration
       t.string :image
       t.string :mp3
       t.string :pdf
-
+      t.integer :subtheme_id
+      
       t.timestamps
     end
   end
