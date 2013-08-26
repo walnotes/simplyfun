@@ -1,5 +1,7 @@
 SfsLanguages::Application.routes.draw do
 
+  devise_for :users
+
   resources :language_tables
 
   devise_for :admin_users, ActiveAdmin::Devise.config

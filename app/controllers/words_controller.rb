@@ -1,4 +1,5 @@
 class WordsController < ApplicationController
+	before_filter :authenticate_user!
 	def show
 		if params[:word_id]
 			@language = Language.find(params[:language_id])
