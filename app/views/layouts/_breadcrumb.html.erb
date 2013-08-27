@@ -18,7 +18,7 @@
     	<% subtheme = Subtheme.find(params[:id]) %>
       <%= link_to subtheme.name, subtheme %> > 
     	<% word = Word.find(params[:id]) %>
-      <%= link_to word.name_english, word %>
+      <%= link_to word.name, word %>
 
     	<%# word = Word.find(params[:id]) %>
     	<!-- 
