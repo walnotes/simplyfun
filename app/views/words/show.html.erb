@@ -2,8 +2,8 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit-smaller">
-        <h1><%= @word.name_english %></h1>
-        <p><%= @word.name %></p>
+        <h1><%= @word.name %></h1>
+        <p><%= @word.name_english %></p>
 
         <p>View the word
         	<%= link_to 'pdf file', @word.pdf %> or play the audio file
@@ -21,6 +21,7 @@
         </p>
       </div>
 
+      <!-- 
       View the same word in other languages
       <ul>
       	<% SubthemesWords.where('word_id = ?', @word.id).each do |s| %>
@@ -29,6 +30,7 @@
       		</li>
       	<% end %>
       </ul>
+      -->
     </div>
 
 

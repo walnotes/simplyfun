@@ -3,8 +3,7 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit-smaller">
       	<% theme = Theme.find(params[:id]) %>
-        <h1><%= theme.name %></h1>
-
+        <h1><%= theme.name %> - <%= theme.name_english %></h1>
         <p>View the 
         	<%= link_to 'coloring book', @theme.pdf %> or select a sub-theme</p>
         <p>
