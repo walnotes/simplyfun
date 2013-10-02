@@ -410,8 +410,8 @@ words.each do |line|
 	Theme.find_or_create_by_name(line[0])
 	Subtheme.find_or_create_by_name_english(line[1])
 
-	theme = line[0].tr('The ', '').downcase
-	subtheme = line[1].tr('The ', '').downcase
+	theme = line[0].gsub('The', '').lstrip.downcase
+	subtheme = line[1].gsub('The', '').lstrip.downcase
 	word_english = line[2]
 	filename = line[2].tr(" ", "_")
 	word_spanish = line[3]
