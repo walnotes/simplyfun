@@ -45,12 +45,58 @@ subthemes.each do |s|
 	subtheme = Subtheme.create! name: name, 
 	name_english: name_english, 
 	image: server_prefix + 'subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
-	pdf_flashcards: server_prefix + 'subtheme/subtheme/subtheme_' + filename + '_worksheets.pdf', 
+	pdf_flashcards: server_prefix + 'subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
 	theme_id: city_theme.id
 end
 
-eroi
 
+# Create the theme
+house_theme = Theme.create! name: 'La Casa', name_english: 'House', image: server_prefix + 'theme_house/theme_image_house.jpg', pdf: server_prefix + 'theme_house/theme_house_coloringbook.pdf', language_id: spanish.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Bathroom', 'El Baño', 'bathroom'], ['The Bedroom', 'La Habitacíon', 'bedroom'], ['Kitchen', 'La Cocina', 'kitchen'], ['The Living Room', 'La Sala', 'living_room']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: house_theme.id
+end
+
+# Create the theme
+school_theme = Theme.create! name: 'La Escuela', name_english: 'School', image: server_prefix + 'theme_school/theme_image_school.jpg', pdf: server_prefix + 'theme_school/theme_school_coloringbook.pdf', language_id: spanish.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Backpack', 'La Mochila', 'backpack'], ['The Lesson', 'La Lección', 'lesson'], ['The School', 'La Escuela', 'school'], ['Subjects', 'Las Materias', 'subjects']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: school_theme.id
+end
+
+# Create the theme
+the_trip_theme = Theme.create! name: 'El Viaje', name_english: 'The Trip', image: server_prefix + 'theme_the_trip/theme_image_the_trip.jpg', pdf: server_prefix + 'theme_the_trip/theme_the_trip_coloringbook.pdf', language_id: spanish.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Airport', 'El Aeropuerto', 'airport'], ['The Beach', 'La Playa', 'beach'], ['The Hotel', 'El Hotel', 'hotel'], ['The Trip', 'El Viaje', 'the_trip']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: the_trip_theme.id
+end
 
 
 
@@ -65,7 +111,7 @@ words = [['The City', 'The Street', 'traffic light', 'el semáforo'],
 ['The City', 'The Street', 'bridge', 'el puente'],
 ['The City', 'The Street', 'pedestrian', 'el peatón'],
 ['The City', 'The Street', 'river', 'el río'],
-['The City', 'The Street', 'Watch out! Careful!', '¡Cuidado!'],
+['The City', 'The Street', 'watch out careful', '¡Cuidado!'],
 ['The City', 'The Street', 'to walk', 'caminar'],
 ['The City', 'The Street', 'to wait for', 'esperar'],
 ['The City', 'The Street', 'to be careful', 'tener cuidado'],
@@ -104,8 +150,8 @@ words = [['The City', 'The Street', 'traffic light', 'el semáforo'],
 ['The City', 'The Car', 'to go', 'ir'],
 ['The City', 'The Car', 'to drive', 'manejar'],
 ['The City', 'The Car', 'to crash', 'chocar'],
-['The City', 'The Car', '(to go) fast', 'ir rápido'],
-['The City', 'The Car', '(to go) slowly', 'ir despacio'],
+['The City', 'The Car', 'to go fast', 'ir rápido'],
+['The City', 'The Car', 'to go slowly', 'ir despacio'],
 ['The City', 'The Car', 'to the left', 'a la izquierda'],
 ['The City', 'The Car', 'to the right', 'a la derecha'],
 ['The City', 'Verbs', 'to walk', 'caminar'],
@@ -121,8 +167,8 @@ words = [['The City', 'The Street', 'traffic light', 'el semáforo'],
 ['The City', 'Verbs', 'to go', 'ir'],
 ['The City', 'Verbs', 'to drive', 'manejar'],
 ['The City', 'Verbs', 'to crash', 'chocar'],
-['The City', 'Verbs', '(to go) fast', 'ir rápido'],
-['The City', 'Verbs', '(to go) slowly', 'ir despacio'],
+['The City', 'Verbs', 'to go fast', 'ir rápido'],
+['The City', 'Verbs', 'to go slowly', 'ir despacio'],
 ['The City', 'Verbs', 'to the left', 'a la izquierda'],
 ['The City', 'Verbs', 'to the right', 'a la derecha'],
 ['The House', 'The Living Room', 'fireplace', 'la chimenea'],
@@ -207,7 +253,7 @@ words = [['The City', 'The Street', 'traffic light', 'el semáforo'],
 ['The School', 'The Subjects', 'History', 'la historia'],
 ['The School', 'The Subjects', 'Math', 'las matemáticas'],
 ['The School', 'The Subjects', 'Music', 'la música'],
-['The School', 'The Subjects', 'Geography', 'la geograía'],
+['The School', 'The Subjects', 'Geography', 'la geografía'],
 ['The School', 'The Subjects', 'Languages', 'los idiomas'],
 ['The School', 'The Subjects', 'computer', 'la computadora'],
 ['The School', 'The Subjects', 'map', 'el mapa'],
@@ -372,7 +418,8 @@ words.each do |line|
 	Word.create!(
 		:image => server_prefix + 'theme_' + theme + '/subtheme/word_images/images_' + subtheme + '/' + filename + '.jpg',
 		:mp3 => server_prefix + 'theme_' + theme + '/subtheme/word_audio/audio_' + subtheme + '/' + filename + '.mp3',
-		:pdf => server_prefix + 'theme_' + theme + '/subtheme/word_pdfs/pdfs_' + subtheme + '/' + filename + '.pdf',
+    # :pdf => server_prefix + 'theme_' + theme + '/subtheme/word_pdfs/pdfs_' + subtheme + '/' + filename + '.pdf',
+		:pdf => server_prefix + 'theme_' + theme + '/subtheme/word_pdfs/pdfs_' + subtheme + '/' + filename + '_' + subtheme + '_spanish.pdf',
 		:name => word_spanish,
 		:name_english => word_english,
 		:subtheme_id => Subtheme.find_by_name_english(line[1]).id
