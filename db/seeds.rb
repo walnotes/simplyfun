@@ -415,6 +415,22 @@ words.each do |line|
 	subtheme = line[1].gsub('The', '').lstrip.downcase
 	word_english = line[2]
 	filename = line[2].tr(" ", "_")
+	
+
+	# # Attempt at correcting audio filenames with a script
+	# audio_array = filename.split("_")
+	# if audio_array.length > 1
+	# 	audio_filename = audio_array[0] + " " + audio_array[1].capitalize + " "
+	# 	(2..audio_array.length-1).each do |i|
+	# 		audio_filename += audio_array[i] + " "
+	# 	end
+	# 	audio_filename = audio_filename.rstrip
+	# else
+	# 	audio_filename = audio_array[0]
+	# end
+	# audio_filename += " single word Spanish"
+	# puts audio_filename
+
 	word_spanish = line[3]
 	Word.create!(
 		:image => server_prefix + 'theme_' + theme + '/subtheme/word_images/images_' + subtheme + '/' + filename + '.jpg',
