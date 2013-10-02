@@ -19,7 +19,7 @@ spanish = Language.create! name_english: 'Spanish', name: 'Español'
 # 	{ name: 'el banco', name_english: 'bank', image: 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/word_images/images_buildings/bank.jpg', mp3: 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/word_audio/audio_buildings/Bank%20single%20word%20Spanish.mp3', pdf: 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/word_pdfs/pdfs_buildings/bank_city_spanish.pdf', subtheme_id: buildings_subtheme.id }
 # 	])
 	
-# User.create! ([{ email: 'apchait@gmail.com', password: 'password', password_confirmation: 'password'}, {email: 'walterchkoning@yahoo.com', password: 'password', password_confirmation: 'password'}, {email: 'schartowm@sfslanguages.com', password: 'password', password_confirmation: 'password'}])
+User.create! ([{ email: 'apchait@gmail.com', password: 'password', password_confirmation: 'password'}, {email: 'walterchkoning@yahoo.com', password: 'password', password_confirmation: 'password'}, {email: 'schartowm@sfslanguages.com', password: 'password', password_confirmation: 'password'}])
 
 
 
@@ -49,7 +49,7 @@ subthemes.each do |s|
 	theme_id: city_theme.id
 end
 
-
+eroi
 
 
 
