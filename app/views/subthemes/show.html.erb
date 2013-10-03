@@ -3,7 +3,8 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit-smaller">
       	<% subtheme = Subtheme.find(params[:id]) %>
-        <h1><%= subtheme.name %> - <%= subtheme.name_english %></h1>
+        <h1><%= subtheme.name %></h1>
+        <p><%= subtheme.name_english %></p>
 
         <p>View the 
         	<%= link_to 'flashcards', @subtheme.pdf_flashcards %>, 
@@ -11,7 +12,11 @@
         <p>
         	<ul>
           	<% @subtheme.words.each do |w| %>
-          		<li><%= link_to w.name, word_path(w) %></li>
+              <!-- <li><%#= link_to w.name, word_path(w) %><br/><%= image_tag w.image, width: '100' %></li> -->
+            	<div style="display:inline-block;width:100px;">
+              	<div style="width:100px;text-align:center;margin-left:10px;"><%= link_to w.name, word_path(w) %></div>
+                <%= image_tag w.image, width: '100' %>
+            	</div>
           	<% end %>
         	</ul>
         </p>

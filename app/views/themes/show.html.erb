@@ -3,7 +3,8 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit-smaller">
       	<% theme = Theme.find(params[:id]) %>
-        <h1><%= theme.name %> - <%= theme.name_english %></h1>
+        <h1><%= theme.name %></h1>
+        <p><%= theme.name_english %></p>
         <p>View the 
         	<%= link_to 'coloring book', @theme.pdf %> or select a sub-theme</p>
         <p>
@@ -13,7 +14,8 @@
         		<% end %>
         	</ul>
         </p>
-      	<%= image_tag @theme.image, width: '400', height: '600' %>
+      	<%= image_tag @theme.image, width: '200', height: '300' %>
+      	<%#= image_tag @theme.image, width: '400', height: '600' %>
 
       </div>
 

@@ -45,8 +45,9 @@ subthemes.each do |s|
 	name = s[1]
 	subtheme = Subtheme.create! name: name, 
 	name_english: name_english, 
-	image: server_prefix + 'subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
-	pdf_flashcards: server_prefix + 'subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	image: server_prefix + 'theme_city/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_city/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_city/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
 	theme_id: city_theme.id
 end
 
@@ -62,8 +63,9 @@ subthemes.each do |s|
 	name = s[1]
 	subtheme = Subtheme.create! name: name, 
 	name_english: name_english, 
-	image: server_prefix + 'subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
-	pdf_flashcards: server_prefix + 'subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	image: server_prefix + 'theme_house/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_house/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_house/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
 	theme_id: house_theme.id
 end
 
@@ -78,8 +80,9 @@ subthemes.each do |s|
 	name = s[1]
 	subtheme = Subtheme.create! name: name, 
 	name_english: name_english, 
-	image: server_prefix + 'subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
-	pdf_flashcards: server_prefix + 'subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	image: server_prefix + 'theme_school/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_school/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_school/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
 	theme_id: school_theme.id
 end
 
@@ -94,8 +97,9 @@ subthemes.each do |s|
 	name = s[1]
 	subtheme = Subtheme.create! name: name, 
 	name_english: name_english, 
-	image: server_prefix + 'subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
-	pdf_flashcards: server_prefix + 'subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	image: server_prefix + 'theme_the_trip/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_the_trip/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_the_trip/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
 	theme_id: the_trip_theme.id
 end
 
@@ -436,7 +440,7 @@ words.each do |line|
 		:image => server_prefix + 'theme_' + theme + '/subtheme/word_images/images_' + subtheme + '/' + filename + '.jpg',
 		:mp3 => server_prefix + 'theme_' + theme + '/subtheme/word_audio/audio_' + subtheme + '/' + filename + '.mp3',
     # :pdf => server_prefix + 'theme_' + theme + '/subtheme/word_pdfs/pdfs_' + subtheme + '/' + filename + '.pdf',
-		:pdf => server_prefix + 'theme_' + theme + '/subtheme/word_pdfs/pdfs_' + subtheme + '/' + filename + '_' + subtheme + '_spanish.pdf',
+		:pdf => server_prefix + 'theme_' + theme + '/subtheme/word_pdfs/pdfs_' + subtheme + '/' + filename + '_' + theme + '_spanish.pdf',
 		:name => word_spanish,
 		:name_english => word_english,
 		:subtheme_id => Subtheme.find_by_name_english(line[1]).id
