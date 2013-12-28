@@ -10,94 +10,318 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
+Language.delete_all
+
+
 User.delete_all	
 User.create! ([{ email: 'apchait@gmail.com', password: 'password', password_confirmation: 'password'}, 
   {email: 'walterchkoning@yahoo.com', password: 'password', password_confirmation: 'password'}, 
   {email: 'guest@sfslanguages.com', password: 'sfsonline', password_confirmation: 'sfsonline'}, 
   {email: 'schartowm@sfslanguages.com', password: 'password', password_confirmation: 'password'}])
 
-# Delete the contents of the Language, Theme and Subtheme tables
-Language.delete_all
-Theme.delete_all
-Subtheme.delete_all
+# We need to loop through the languages and create the themes, subthemes, and words for each.
+# The previous working version was just the line for spanish.  I added french and vietnamese for clarity. -WK 2013Dec27
 
-# Loop through the languages and create the themes, subthemes, and words for each.
+# spanish = Language.create! name_english: 'Spanish', name: 'Español'
+# french = Language.create! name_english: 'French', name: 'Français'
+# vietnamese = Language.create! name_english: 'Vietnamese', name: 'Việt'
+
 languages = [['spanish','Spanish', 'Español'], ['french', 'French', 'Français'], ['vietnamese', 'Vietnamese', 'Việt']]
-
-# The list of Themes
-theme_list = ['city', 'house', 'school', 'the_trip']
-
-# The list of Themes for each Language
-theme_spanish = [['city', 'The City', 'La Ciudad'], ['house', 'House', 'La Casa'], ['school', 'School', 'La Escuela'], ['the_trip', 'The Trip', 'El Viaje']]
-theme_french = [['city', 'The City', 'La Ville'], ['house', 'House', 'La Maison'], ['school', 'School', 'L\'École'], ['the_trip', 'The Trip', 'Le Voyage']]
-theme_vietnamese = [['city', 'The City', ''], ['house', 'House', ''], ['school', 'School', ''], ['the_trip', 'The Trip', '']]
-
-# The list of Subthemes
-subtheme_list_city = ['buildings', 'car', 'street', 'transportation']
-subtheme_list_house = ['bathroom', 'bedroom', 'kitchen', 'living room']
-subtheme_list_school = ['backpack', 'lesson', 'school', 'subjects']
-subtheme_list_the_trip = ['airport', 'beach', 'hotel', 'trip']
-
-# The list of Subthemes for Spanish
-subthemes_city_spanish = [['The Buildings', 'Los Edificios', 'buildings'], ['The Car', 'El Coche', 'car'], ['The Street', 'La Calle', 'street'], ['The Transportation', 'La Transportación', 'transportation']]
-subthemes_house_spanish = [['The Bathroom', 'El Baño', 'bathroom'], ['The Bedroom', 'La Habitacíon', 'bedroom'], ['The Kitchen', 'La Cocina', 'kitchen'], ['The Living Room', 'La Sala', 'living room']]
-subthemes_school_spanish = [['The Backpack', 'La Mochila', 'backpack'], ['The Lesson', 'La Lección', 'lesson'], ['The School', 'La Escuela', 'school'], ['Subjects', 'Las Materias', 'subjects']]
-subthemes_the_trip_spanish = [['The Airport', 'El Aeropuerto', 'airport'], ['The Beach', 'La Playa', 'beach'], ['The Hotel', 'El Hotel', 'hotel'], ['The Trip', 'El Viaje', 'trip']]
-
-# The list of Subthemes for French
-subthemes_city_french = [['The Buildings', 'Les Bâtiments', 'buildings'], ['The Car', 'Le Transport', 'car'], ['The Street', 'La Rue', 'street'], ['The Transportation', 'La Voiture', 'transportation']]
-subthemes_house_french = [['The Bathroom', 'Bain', 'bathroom'], ['The Bedroom', 'Chambre', 'bedroom'], ['The Kitchen', 'Cuisine', 'kitchen'], ['The Living Room', 'Chambre', 'living room']]
-subthemes_school_french = [['The Backpack', 'Le Sac à Dos', 'backpack'], ['The Lesson', 'La Leçon', 'lesson'], ['The School', 'L\'École', 'school'], ['Subjects', 'Les Matières', 'subjects']]
-subthemes_the_trip_french = [['The Airport', 'L’Aéroport', 'airport'], ['The Beach', 'La Plage', 'beach'], ['The Hotel', 'L’Hôtel', 'hotel'], ['The Trip', 'Le Voyage', 'trip']]
-
-# The list of Subthemes for Vietnamese
-subthemes_city_vietnamese = [['The Buildings', 'tòa nhà nhiều tầng', 'buildings'], ['The Car', 'xe ô tô', 'car'], ['The Street', 'đường phố', 'street'], ['The Transportation', 'giao thông', 'transportation']]
-subthemes_house_vietnamese = [['The Bathroom', 'phòng tắm', 'bathroom'], ['The Bedroom', 'phòng ngủ', 'bedroom'], ['The Kitchen', 'nhà bếp', 'kitchen'], ['The Living Room', 'phòng khách', 'living room']]
-subthemes_school_vietnamese = [['The Backpack', 'cái ba lô', 'backpack'], ['The Lesson', 'bài học', 'lesson'], ['The School', 'trường học', 'school'], ['Subjects', 'các môn học', 'subjects']]
-subthemes_the_trip_vietnamese = [['The Airport', 'sân bay', 'airport'], ['The Beach', 'bãi biển', 'beach'], ['The Hotel', 'khách sạn', 'hotel'], ['The Trip', 'cuộc du ngoạn', 'trip']]
-
-
-
-# Create an entry for each language
 languages.each do |s|
 	name_english = s[1]
 	name = s[2]
+	server_prefix_name = s[0]
 	language = Language.create! name_english: name_english, name: name
+  # Files for each language are in folders for that (e.g. sfs_site_languageName)
+	server_prefix = 'http://fivesomnimedia.com/projects/sfs/sfs_site_' + language.name_english.downcase + '/'
+end
+  
+# server_prefix = "http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/"
+# server_prefix = "http://fivesomnimedia.com/projects/sfs/sfs_site_french/"
+# server_prefix = "http://fivesomnimedia.com/projects/sfs/sfs_site_vietnamese/"
 
-  # Files for each language are in folders for that language (e.g. sfs_site_french)
-  server_prefix = 'http://fivesomnimedia.com/projects/sfs/sfs_site_' + s[0] + '/'
+Theme.delete_all
+Subtheme.delete_all
 
-  # Create an entry for each Theme
-  theme_list.each do |t|
-    theme_language = theme_+s[0]
-    theme = Theme.create! 
-      name: theme_language[2], 
-      name_english: theme_language[1], 
-      image: server_prefix + 'theme_city/theme_image_' + theme_language[0] + '.jpg', 
-      pdf: server_prefix + 'theme_city/theme_' + theme_language[0] + '_coloringbook.pdf', 
-      language_id: language.id
 
-    # Create an entry for each Subtheme
-    subthemes = 'subthemes_' + t + '_' + s[0]
-    # subthemes = [['The Buildings', 'Les Bâtiments', 'buildings'], ['The Car', 'Le Transport', 'car'], ['The Street', 'La Rue', 'street'], ['The Transportation', 'La Voiture', 'transportation']]
+# FRENCH
+# Create the theme - French - City
+city_theme = Theme.create! 
+  name: 'La Ville', 
+  name_english: 'The City', 
+  image: server_prefix + 'theme_city/theme_image_city.jpg', 
+  pdf: server_prefix + 'theme_city/theme_city_coloringbook.pdf', 
+  language_id: french.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Buildings', 'Les Bâtiments', 'buildings'], ['The Car', 'Le Transport', 'car'], ['The Street', 'La Rue', 'street'], ['The Transportation', 'La Voiture', 'transportation']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_city/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_city/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_city/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: city_theme.id
+end
 
-    # Create the subthemes
-    subthemes.each do |w|
-    	name_english = w[0]
-    	filename = w[2]
-    	name = w[1]
-    	subtheme = Subtheme.create! name: name, 
-    	name_english: name_english, 
-    	image: server_prefix + 'theme_city/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
-    	pdf_flashcards: server_prefix + 'theme_city/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
-    	pdf_worksheet: server_prefix + 'theme_city/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
-    	theme_id: theme.id
-    end
+# Create the theme - French - House
+house_theme = Theme.create! 
+  name: 'La Maison', 
+  name_english: 'House', 
+  image: server_prefix + 'theme_house/theme_image_house.jpg', 
+  pdf: server_prefix + 'theme_house/theme_house_coloringbook.pdf', 
+  language_id: french.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Bathroom', 'Bain', 'bathroom'], ['The Bedroom', 'Chambre', 'bedroom'], ['The Kitchen', 'Cuisine', 'kitchen'], ['The Living Room', 'Chambre', 'living room']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2].tr(" ", "_")
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_house/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_house/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_house/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: house_theme.id
+end
 
+# Create the theme - French - School
+school_theme = Theme.create! 
+  name: 'L\'École', 
+  name_english: 'School', 
+  image: server_prefix + 'theme_school/theme_image_school.jpg', 
+  pdf: server_prefix + 'theme_school/theme_school_coloringbook.pdf', 
+  language_id: french.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Backpack', 'Le Sac à Dos', 'backpack'], ['The Lesson', 'La Leçon', 'lesson'], ['The School', 'L\'École', 'school'], ['Subjects', 'Les Matières', 'subjects']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_school/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_school/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_school/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: school_theme.id
+end
+
+# Create the theme - French - The Trip
+the_trip_theme = Theme.create! 
+  name: 'Le Voyage', 
+  name_english: 'The Trip', 
+  image: server_prefix + 'theme_the_trip/theme_image_the_trip.jpg', 
+  pdf: server_prefix + 'theme_the_trip/theme_the_trip_coloringbook.pdf', 
+  language_id: french.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Airport', 'L’Aéroport', 'airport'], ['The Beach', 'La Plage', 'beach'], ['The Hotel', 'L’Hôtel', 'hotel'], ['The Trip', 'Le Voyage', 'trip']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_the_trip/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_the_trip/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_the_trip/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: the_trip_theme.id
 end
 
 
-# The words section is not complete yet. -WK 2013Dec28
+
+
+
+
+
+# VIETNAMESE
+# Create the theme - Vietnamese - City
+city_theme = Theme.create! 
+  name: 'thành phố', 
+  name_english: 'The City', 
+  image: server_prefix + 'theme_city/theme_image_city.jpg', 
+  pdf: server_prefix + 'theme_city/theme_city_coloringbook.pdf', 
+  language_id: vietnamese.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Buildings', 'tòa nhà nhiều tầng', 'buildings'], ['The Car', 'xe ô tô', 'car'], ['The Street', 'đường phố', 'street'], ['The Transportation', 'giao thông', 'transportation']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_city/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_city/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_city/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: city_theme.id
+end
+
+# Create the theme - Vietnamese - House
+house_theme = Theme.create! 
+  name: 'cái nhà', 
+  name_english: 'House', 
+  image: server_prefix + 'theme_house/theme_image_house.jpg', 
+  pdf: server_prefix + 'theme_house/theme_house_coloringbook.pdf', 
+  language_id: french.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Bathroom', 'phòng tắm', 'bathroom'], ['The Bedroom', 'phòng ngủ', 'bedroom'], ['The Kitchen', 'nhà bếp', 'kitchen'], ['The Living Room', 'phòng khách', 'living room']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2].tr(" ", "_")
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_house/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_house/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_house/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: house_theme.id
+end
+
+# Create the theme - Vietnamese - School
+school_theme = Theme.create! 
+  name: 'trường học', 
+  name_english: 'School', 
+  image: server_prefix + 'theme_school/theme_image_school.jpg', 
+  pdf: server_prefix + 'theme_school/theme_school_coloringbook.pdf', 
+  language_id: french.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Backpack', 'cái ba lô', 'backpack'], ['The Lesson', 'bài học', 'lesson'], ['The School', 'trường học', 'school'], ['Subjects', 'các môn học', 'subjects']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_school/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_school/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_school/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: school_theme.id
+end
+
+# Create the theme - Vietnamese - The Trip
+the_trip_theme = Theme.create! 
+  name: 'cuộc du ngoạn', 
+  name_english: 'The Trip', 
+  image: server_prefix + 'theme_the_trip/theme_image_the_trip.jpg', 
+  pdf: server_prefix + 'theme_the_trip/theme_the_trip_coloringbook.pdf', 
+  language_id: french.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Airport', 'sân bay', 'airport'], ['The Beach', 'bãi biển', 'beach'], ['The Hotel', 'khách sạn', 'hotel'], ['The Trip', 'cuộc du ngoạn', 'trip']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_the_trip/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_the_trip/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_the_trip/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: the_trip_theme.id
+end
+
+
+
+
+# SPANISH
+# Create the theme - Spanish - City
+city_theme = Theme.create! 
+  name: 'La Ciudad', 
+  name_english: 'The City', 
+  image: server_prefix + 'theme_city/theme_image_city.jpg', 
+  pdf: server_prefix + 'theme_city/theme_city_coloringbook.pdf', 
+  language_id: spanish.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Buildings', 'Los Edificios', 'buildings'], ['The Car', 'El Coche', 'car'], ['The Street', 'La Calle', 'street'], ['The Transportation', 'La Transportación', 'transportation']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_city/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_city/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_city/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: city_theme.id
+end
+
+# Create the theme - Spanish - House
+house_theme = Theme.create! 
+  name: 'La Casa', 
+  name_english: 'House', 
+  image: server_prefix + 'theme_house/theme_image_house.jpg', 
+  pdf: server_prefix + 'theme_house/theme_house_coloringbook.pdf', 
+  language_id: spanish.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Bathroom', 'El Baño', 'bathroom'], ['The Bedroom', 'La Habitacíon', 'bedroom'], ['The Kitchen', 'La Cocina', 'kitchen'], ['The Living Room', 'La Sala', 'living room']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2].tr(" ", "_")
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_house/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_house/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_house/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: house_theme.id
+end
+
+# Create the theme - Spanish - School
+school_theme = Theme.create! 
+  name: 'La Escuela', 
+  name_english: 'School', 
+  image: server_prefix + 'theme_school/theme_image_school.jpg', 
+  pdf: server_prefix + 'theme_school/theme_school_coloringbook.pdf', 
+  language_id: spanish.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Backpack', 'La Mochila', 'backpack'], ['The Lesson', 'La Lección', 'lesson'], ['The School', 'La Escuela', 'school'], ['Subjects', 'Las Materias', 'subjects']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_school/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_school/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_school/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: school_theme.id
+end
+
+# Create the theme - Spanish - The Trip
+the_trip_theme = Theme.create! 
+  name: 'El Viaje', 
+  name_english: 'The Trip', 
+  image: server_prefix + 'theme_the_trip/theme_image_the_trip.jpg', 
+  pdf: server_prefix + 'theme_the_trip/theme_the_trip_coloringbook.pdf', 
+  language_id: spanish.id
+# Create an array of arrays of the subtheme
+subthemes = [['The Airport', 'El Aeropuerto', 'airport'], ['The Beach', 'La Playa', 'beach'], ['The Hotel', 'El Hotel', 'hotel'], ['The Trip', 'El Viaje', 'trip']]
+# Create the subthemes
+subthemes.each do |s|
+	name_english = s[0]
+	filename = s[2]
+	name = s[1]
+	subtheme = Subtheme.create! name: name, 
+	name_english: name_english, 
+	image: server_prefix + 'theme_the_trip/subtheme/subtheme_image/subtheme_image_' + filename + '.jpg', 
+	pdf_flashcards: server_prefix + 'theme_the_trip/subtheme/subtheme_flashcards/subtheme_' + filename + '_flashcards.pdf', 
+	pdf_worksheet: server_prefix + 'theme_the_trip/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
+	theme_id: the_trip_theme.id
+end
+
+
+
 
 # Words - French
 words = [
@@ -327,7 +551,7 @@ words = [
 ]
 
 
-# Word.delete_all
+Word.delete_all
 # Words - Spanish
 words = [['City', 'The Street', 'traffic light', 'el semáforo'],
 ['City', 'The Street', 'intersection', 'la intersección'],
@@ -648,24 +872,23 @@ words = [['City', 'The Street', 'traffic light', 'el semáforo'],
 ]
 
 
-# words.each do |line|
-#   Theme.find_or_create_by_name(line[0])
-#   Subtheme.find_or_create_by_name_english(line[1])
-# 
-#   theme = line[0].lstrip.downcase
-#   # theme = line[0].gsub('The', '').lstrip.downcase
-#   subtheme = line[1].gsub('The', '').lstrip.downcase.tr(" ", "_")
-#   word_english = line[2]
-#   filename = line[2].tr(" ", "_")
-# 
-#   word_spanish = line[3]
-#   Word.create!(
-#     :image => server_prefix + 'theme_' + theme + '/subtheme/word_images/images_' + subtheme + '/' + filename + '.jpg',
-#     :mp3 => server_prefix + 'theme_' + theme + '/subtheme/word_audio/audio_' + subtheme + '/' + filename + '.mp3',
-#     :pdf => server_prefix + 'theme_' + theme + '/subtheme/word_pdfs/pdfs_' + subtheme + '/' + filename + '_' + theme + '_spanish.pdf',
-#     :name => word_spanish,
-#     :name_english => word_english,
-#     :subtheme_id => Subtheme.find_by_name_english(line[1]).id
-#   )
-# end
+words.each do |line|
+	Theme.find_or_create_by_name(line[0])
+	Subtheme.find_or_create_by_name_english(line[1])
 
+	theme = line[0].lstrip.downcase
+  # theme = line[0].gsub('The', '').lstrip.downcase
+  subtheme = line[1].gsub('The', '').lstrip.downcase.tr(" ", "_")
+	word_english = line[2]
+	filename = line[2].tr(" ", "_")
+
+	word_spanish = line[3]
+	Word.create!(
+		:image => server_prefix + 'theme_' + theme + '/subtheme/word_images/images_' + subtheme + '/' + filename + '.jpg',
+		:mp3 => server_prefix + 'theme_' + theme + '/subtheme/word_audio/audio_' + subtheme + '/' + filename + '.mp3',
+		:pdf => server_prefix + 'theme_' + theme + '/subtheme/word_pdfs/pdfs_' + subtheme + '/' + filename + '_' + theme + '_spanish.pdf',
+		:name => word_spanish,
+		:name_english => word_english,
+		:subtheme_id => Subtheme.find_by_name_english(line[1]).id
+	)
+end
