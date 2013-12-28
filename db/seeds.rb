@@ -57,11 +57,11 @@ subthemes_school_vietnamese = [['The Backpack', 'cái ba lô', 'backpack'], ['Th
 subthemes_the_trip_vietnamese = [['The Airport', 'sân bay', 'airport'], ['The Beach', 'bãi biển', 'beach'], ['The Hotel', 'khách sạn', 'hotel'], ['The Trip', 'cuộc du ngoạn', 'trip']]
 
 
-
 # Create an entry for each language
 languages.each do |s|
 	name_english = s[1]
 	name = s[2]
+	language_lower = s[0]
 	language = Language.create! name_english: name_english, name: name
 
   # Files for each language are in folders for that language (e.g. sfs_site_french)
@@ -69,16 +69,17 @@ languages.each do |s|
 
   # Create an entry for each Theme
   theme_list.each do |t|
-    theme_language = theme_+s[0]
-    theme = Theme.create! 
-      name: theme_language[2], 
-      name_english: theme_language[1], 
-      image: server_prefix + 'theme_city/theme_image_' + theme_language[0] + '.jpg', 
-      pdf: server_prefix + 'theme_city/theme_' + theme_language[0] + '_coloringbook.pdf', 
-      language_id: language.id
+    theme_language = 'theme_' + language_lower
+    # theme = Theme.create! 
+    #   name: theme_language[2], 
+    #   name_english: theme_language[1], 
+    #   image: server_prefix + 'theme_city/theme_image_' + theme_language[0] + '.jpg',
+    #   pdf: server_prefix + 'theme_city/theme_' + theme_language[0] + '_coloringbook.pdf', 
+    #   language_id: language.id
+    theme = Theme.create! name: theme_language[2], name_english: theme_language[1], image: server_prefix + 'theme_city/theme_image_' + theme_language[0] + '.jpg', pdf: server_prefix + 'theme_city/theme_' + theme_language[0] + '_coloringbook.pdf', language_id: language.id
 
     # Create an entry for each Subtheme
-    subthemes = 'subthemes_' + t + '_' + s[0]
+    subthemes = 'subthemes_' + t + '_' + language_lower
     # subthemes = [['The Buildings', 'Les Bâtiments', 'buildings'], ['The Car', 'Le Transport', 'car'], ['The Street', 'La Rue', 'street'], ['The Transportation', 'La Voiture', 'transportation']]
 
     # Create the subthemes
@@ -93,6 +94,7 @@ languages.each do |s|
     	pdf_worksheet: server_prefix + 'theme_city/subtheme/subtheme_worksheets/subtheme_' + filename + '_worksheets.pdf', 
     	theme_id: theme.id
     end
+  end
 
 end
 
@@ -103,7 +105,7 @@ end
 words = [
 ['City', 'The Street', 'traffic light', 'le feu de signalisation'],
 ['City', 'The Street', 'intersection', 'le croisement'],
-['City', 'The Street', 'sign', 'le panneau']
+['City', 'The Street', 'sign', 'le panneau'],
 ['City', 'The Street', 'sidewalk', 'le trottoir'],
 # ['City', 'The Street', 'city', 'la ville'],
 ['City', 'The Street', 'mailbox', 'la boîte aux lettres'],
@@ -573,7 +575,7 @@ words = [['City', 'The Street', 'traffic light', 'el semáforo'],
 ['The_Trip', 'The Beach', 'lifeguard', 'el/la salvavidas'],
 ['The_Trip', 'The Beach', 'to fish', 'pescar'],
 ['The_Trip', 'The Beach', 'to swim', 'nadar'],
-['The_Trip', 'The Beach', 'to play', 'jugar'],
+['The_Trip', 'The Beach', 'to play', 'jugar']
 # ['The_Trip', 'Verbs', 'to travel', 'viajar'],
 # ['The_Trip', 'Verbs', 'to pack your bags', 'hacer las maletas'],
 # ['The_Trip', 'Verbs', 'to go on vacation', 'ir de vacaciones'],
