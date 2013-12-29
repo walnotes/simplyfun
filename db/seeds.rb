@@ -79,7 +79,38 @@ languages.each do |s|
     theme = Theme.create! name: theme_language[2], name_english: theme_language[1], image: server_prefix + 'theme_city/theme_image_' + theme_language[0] + '.jpg', pdf: server_prefix + 'theme_city/theme_' + theme_language[0] + '_coloringbook.pdf', language_id: language.id
 
     # Create an entry for each Subtheme
-    subthemes = 'subthemes_' + t + '_' + language_lower
+    subthemes_name = 'subthemes_' + t + '_' + language_lower
+    case subthemes_name
+    when subthemes_city_spanish
+      subthemes = subthemes_city_spanish
+    when subthemes_house_spanish
+      subthemes = subthemes_house_spanish
+    when subthemes_school_spanish
+      subthemes = subthemes_school_spanish
+    when subthemes_the_trip_spanish
+      subthemes = subthemes_the_trip_spanish
+
+    when subthemes_city_french
+      subthemes = subthemes_city_french
+    when subthemes_house_french
+      subthemes = subthemes_house_french
+    when subthemes_school_french
+      subthemes = subthemes_school_french
+    when subthemes_the_trip_french
+      subthemes = subthemes_the_trip_french
+
+    when subthemes_city_vietnamese
+      subthemes = subthemes_city_vietnamese
+    when subthemes_house_vietnamese
+      subthemes = subthemes_house_vietnamese
+    when subthemes_school_vietnamese
+      subthemes = subthemes_school_vietnamese
+    when subthemes_the_trip_vietnamese
+      subthemes = subthemes_the_trip_vietnamese
+
+    else
+      subthemes = subthemes_the_trip_vietnamese
+    end
     # subthemes = [['The Buildings', 'Les Bâtiments', 'buildings'], ['The Car', 'Le Transport', 'car'], ['The Street', 'La Rue', 'street'], ['The Transportation', 'La Voiture', 'transportation']]
 
     # Create the subthemes
