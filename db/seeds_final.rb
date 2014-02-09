@@ -7,7 +7,7 @@ word_file = "words.csv"
 
 # Create the languages
 CSV.foreach(Rails.root.join(lang_file), headers: true) do |row|
-	Language.create! name: row[], name_english[] etc...
+	Language.create! name: row[0], name_english = row[1] etc...
 end
 
 CSV.foreach(Rails.root.join(theme_file), headers: true) do |row|
