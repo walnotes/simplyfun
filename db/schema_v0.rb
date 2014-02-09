@@ -50,33 +50,16 @@ ActiveRecord::Schema.define(:version => 20130826042804) do
     t.string   "name_english"
     t.string   "name"
     t.string   "description"
-    t.string   "language_identifier"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-  end
-
-  create_table "themes", :force => true do |t|
-    t.string   "name"
-    t.string   "name_english"
-    t.string   "image"
-    t.string   "pdf"
-    t.string   "language_identifier"
-    t.string   "theme_identifier"
-    t.integer  "language_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.string   "description"
   end
 
   create_table "subthemes", :force => true do |t|
-    t.string   "name"
-    t.string   "name_english"
-    t.string   "image"
     t.string   "pdf_flashcards"
     t.string   "pdf_worksheet"
-    t.string   "language_identifier"
-    t.string   "theme_identifier"
-    t.string   "subtheme_identifier"
+    t.string   "image"
+    t.string   "name_english"
+    t.string   "name"
     t.integer  "theme_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
@@ -84,33 +67,29 @@ ActiveRecord::Schema.define(:version => 20130826042804) do
     t.string   "video_url"
   end
 
-  create_table "words", :force => true do |t|
-    t.string   "name"
-    t.string   "name_english"
-    t.string   "name_image"
-    t.string   "image"
-    t.string   "mp3"
-    t.string   "pdf"
-    t.string   "language_identifier"
-    t.string   "theme_identifier"
-    t.string   "subtheme_identifier"
+  create_table "subthemes_words", :force => true do |t|
+    t.integer  "word_id"
     t.integer  "subtheme_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "word_english"
+    t.string   "word_foreign"
+    t.string   "word_foreign_image"
+    t.string   "image"
+    t.string   "pdf"
+    t.string   "mp3"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
-  # create_table "subthemes_words", :force => true do |t|
-  #   t.integer  "word_id"
-  #   t.integer  "subtheme_id"
-  #   t.string   "word_english"
-  #   t.string   "word_foreign"
-  #   t.string   "word_foreign_image"
-  #   t.string   "image"
-  #   t.string   "pdf"
-  #   t.string   "mp3"
-  #   t.datetime "created_at",         :null => false
-  #   t.datetime "updated_at",         :null => false
-  # end
+  create_table "themes", :force => true do |t|
+    t.string   "image"
+    t.string   "pdf"
+    t.string   "name_english"
+    t.string   "name"
+    t.integer  "language_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "description"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -129,5 +108,17 @@ ActiveRecord::Schema.define(:version => 20130826042804) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "words", :force => true do |t|
+    t.string   "name_english"
+    t.string   "name"
+    t.string   "name_image"
+    t.string   "image"
+    t.string   "mp3"
+    t.string   "pdf"
+    t.integer  "subtheme_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
 end
