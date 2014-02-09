@@ -1,9 +1,9 @@
 require 'csv'
 
-lang_file = "languages.csv"
-theme_file = "themes.csv"
-subtheme_file = "subthemes.csv"
-word_file = "words.csv"
+lang_file = "public/csvs/languages.csv"
+theme_file = "public/csvs/themes.csv"
+subtheme_file = "public/csvs/subthemes.csv"
+word_file = "public/csvs/words.csv"
 
 # Create the languages
 CSV.foreach(Rails.root.join(lang_file), headers: true) do |row|
