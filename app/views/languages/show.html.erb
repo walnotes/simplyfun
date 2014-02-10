@@ -2,7 +2,10 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit-smaller">
-        <h1>Español</h1>
+        <% if params[:controller] == 'languages' %>
+        	<% language = Language.find(params[:id]) %>
+        	<h1><%= language.name_english %></h1>
+        <% end %>
         <p>Select a theme</p>
         <!--
         <p>
