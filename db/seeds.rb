@@ -1,14 +1,6 @@
 #!/bin/env ruby
 # encoding: utf-8
-
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
+require 'csv'
 
 User.delete_all	
 User.create! ([{ email: 'apchait@gmail.com', password: 'password', password_confirmation: 'password'}, 
@@ -22,55 +14,36 @@ Theme.delete_all
 Subtheme.delete_all
 Word.delete_all
 
+lang_file = "public/csvs/languages.csv"
+theme_file = "public/csvs/themes.csv"
+subtheme_file = "public/csvs/subthemes.csv"
+word_file = "public/csvs/words.csv"
 
-# Loop through the languages and create the themes, subthemes, and words for each.
-languages = [
-  ['spanish','Spanish', 'Español'],
-  ['french', 'French', 'Français'],
-  ['vietnamese', 'Vietnamese', 'Việt']
-  ]
 
-theme_list = [
-  ['city', 'La Ciudad', 'The City', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/theme_image_city.jpg', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/theme_city_coloringbook.pdf', 'spanish', 'city_spanish'],
-  ['house', 'La Casa', 'House', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_house/theme_image_house.jpg', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_house/theme_house_coloringbook.pdf', 'spanish', 'house_spanish']
-  ]
+# Model attributes are mapped to row[column] so if the csv has name in column 0, you set name: row[0], etc...
+# For lookups, set language_id: Language.find_by_language_identifier(row[x]), same for themes and subthems lookup
+# Make sure all the model attributes are accounted for, doesn't matter if there are extra csv headers
 
-subtheme_list = [
-  ['la calle', 'The Street', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/subtheme_image/subtheme_image_street.jpg', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/subtheme_flashcards/subtheme_street_flashcards.pdf', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/subtheme_worksheets/subtheme_street_worksheets.pdf', 'spanish', 'city_spanish', 'street'],
-  ['los edificios', 'The Buildings', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/subtheme_image/subtheme_image_buildings.jpg', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/subtheme_flashcards/subtheme_buildings_flashcards.pdf', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/subtheme_worksheets/subtheme_buildings_worksheets.pdf', 'spanish', 'city_spanish', 'buildings']
-  ]
-  
-word_list = [
-  ['el semáforo', 'the traffic light', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/word_images/images_street/traffic_light.jpg', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/word_audio/audio_street/traffic_light.mp3', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/word_pdfs/pdfs_street/traffic_light_city_spanish.pdf', 'spanish', 'city_spanish', 'street'],
-  ['la intersección', 'the intersection', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/word_images/images_street/intersection.jpg', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/word_audio/audio_street/intersection.mp3', 'http://fivesomnimedia.com/projects/sfs/sfs_site_spanish/theme_city/subtheme/word_pdfs/pdfs_street/intersection_city_spanish.pdf', 'spanish', 'city_spanish', 'street']
-  ]
+CSV.foreach(Rails.root.join(lang_file), headers: true) do |row|
+  # CSV headers       name,name_english,language_id,theme_identifier
+  # Model Attributes    :description, :name, :name_english, :language_identifier
+  Language.create! name: row[0], name_english: row[1], language_identifier: row[3]
+end
 
-# Create an entry for each language
-languages.each do |lang|
-	language = Language.create! name_english: lang[1], name: lang[2]
-#	language = Language.create! name_english: lang[1], name: lang[2], language_identifier: lang[0]
+CSV.foreach(Rails.root.join(theme_file), headers: true) do |row|
+  # CSV Headers         name, name_english, image, pdf, language, theme
+  # Model Attributes    :name, :name_english, :image, :pdf, :language_id, :description
+  Theme.create! name: row[0], name_english: row[1], image: row[2], pdf: row[3], language_id: Language.find_by_language_identifier(row[4]).id, theme_identifier: row[5]
+end
 
-  # TODO: theme_list = Only lines for the themes in the current language (ie. all spanish themes)
-  # Create an entry for each theme for the current language
-  theme_list.each do |t|
-    theme = Theme.create! name: t[1], name_english: t[2], image: t[3], pdf: t[4]
-#    theme = Theme.create! name: t[1], name_english: t[2], image: t[3], pdf: t[4], language_identifier: t[5], theme_identifier: t[6]
-#      language_id: Language.find_by_language_identifier(t[5]).id
-    
-    # TODO: subtheme = Only lines for subthemes in the current theme in the current language (ie. all subthemes for city in spanish)
-    # Create an entry for each subtheme for the current theme
-    subtheme_list.each do |s|
-    	subtheme = Subtheme.create! name: s[0], name_english: s[1], image: s[2], pdf_flashcards: s[3], pdf_worksheet: s[4]
-#    	subtheme = Subtheme.create! name: s[0], name_english: s[1], image: s[2], pdf_flashcards: s[3], pdf_worksheet: s[4], language_identifier: s[5], theme_identifier: s[6], subtheme_identifier: s[7]
-#      	theme_id: Theme.find_by_theme_identifer(s[6]).id
+CSV.foreach(Rails.root.join(subtheme_file), headers: true) do |row|
+  # CSV Headers       name,name_english,image,pdf_flashcards,pdf_worksheet,language,theme,subtheme,subtheme_no_language      
+  # Model Attributes    :image, :name, :name_english, :pdf_flashcards, :pdf_worksheet, :description, :video_url, :theme_id, :subtheme_identifier
+  Subtheme.create! name: row[0], name_english: row[1], image: row[2], pdf_flashcards: row[3], pdf_worksheet: row[4], theme_id: Theme.find_by_theme_identifier(row[6]).id, subtheme_identifier: row[7]
+end
 
-      # TODO: subtheme = Only lines for words in subthemes in the current theme in the current language (ie. all words in street for city in spanish)
-      # Create an entry for each word in the current subtheme
-      word_list.each do |w|
-      	word = Word.create! name: w[0], name_english: w[1], image: w[2], mp3: w[3], pdf: w[4]
-#      	word = Word.create! name: w[0], name_english: w[1], image: w[2], mp3: w[3], pdf: w[4], language_identifier: w[5], theme_identifier: w[6], subtheme_identifier: w[7]
-#        	subtheme_id: Subtheme.find_by_subtheme_identifier(w[7]).id
-      end #end word
-    end #end subtheme
-  end #end theme
-end #end language
+CSV.foreach(Rails.root.join(word_file), headers: true) do |row|
+  # CSV Headers        name,name_english,image,mp3,pdf,language,theme,subtheme,subtheme_no_language
+  # Model Attributes   :image, :mp3, :name, :name_english, :name_image, :pdf, :subtheme_id, :word_identifier
+  Word.create! name: row[0], name_english: row[1], image: row[2], mp3: row[3], pdf: row[4], subtheme_id: Subtheme.find_by_subtheme_identifier(row[7]).id
+end

@@ -1,5 +1,5 @@
 class Word < ActiveRecord::Base
-  attr_accessible :image, :mp3, :name, :name_english, :name_image, :pdf, :subtheme_id
+  attr_accessible :image, :mp3, :name, :name_english, :name_image, :pdf, :subtheme_id, :word_identifier
 
   belongs_to :subtheme
 

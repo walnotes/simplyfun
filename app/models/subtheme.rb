@@ -1,5 +1,5 @@
 class Subtheme < ActiveRecord::Base
-  attr_accessible :image, :name, :name_english, :pdf_flashcards, :pdf_worksheet, :description, :video_url, :theme_id
+  attr_accessible :image, :name, :name_english, :pdf_flashcards, :pdf_worksheet, :description, :video_url, :theme_id, :subtheme_identifier
   belongs_to :theme
   has_many :words
   has_one :language, :through => :theme
