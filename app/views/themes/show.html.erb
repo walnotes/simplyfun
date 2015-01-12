@@ -10,7 +10,7 @@
         <p>
         	<ul>
         		<% Subtheme.where('theme_id = ?', "#{@theme.id}").each do |s| %>
-        			<li><%= link_to s.name, subtheme_path(s) %></li>
+        			<li><%= link_to s.name_english, subtheme_path(s) %> <span style="font-size:11px"><%= s.name %></span></li>
         		<% end %>
         	</ul>
         </p>

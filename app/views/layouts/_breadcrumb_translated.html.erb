@@ -2,23 +2,23 @@
     <div class="container">
     <% if params[:controller] == 'languages' %>
     	<% language = Language.find(params[:id]) %>
-    	<%= link_to language.name_english, language %>
+    	<%= link_to language.name, language %>
     <% elsif params[:controller] == 'themes' %>
     	<% theme = Theme.find(params[:id]) %>
-    	<%= link_to theme.language.name_english, theme.language %> > <%= link_to theme.name_english, theme %>
+    	<%= link_to theme.language.name, theme.language %> > <%= link_to theme.name, theme %>
     <% elsif params[:controller] == 'subthemes' %>
     	<% theme = Subtheme.find(params[:id]) %>
-    	<%= link_to theme.language.name_english, theme.language %> > 
+    	<%= link_to theme.language.name, theme.language %> > 
 
     	<% subtheme = Subtheme.find(params[:id]) %>
-    	<%#= link_to subtheme.language.name, subtheme.language %> <%= link_to subtheme.theme.name_english, subtheme.theme %> > <%= link_to subtheme.name_english, subtheme %>
+    	<%#= link_to subtheme.language.name, subtheme.language %> <%= link_to subtheme.theme.name, subtheme.theme %> > <%= link_to subtheme.name, subtheme %>
     <% elsif params[:controller] == 'words' %>
     	<% theme = Word.find(params[:id]) .theme %>
-    	<%= link_to theme.language.name_english, theme.language %> > <%= link_to theme.name_english, theme %> > 
+    	<%= link_to theme.language.name, theme.language %> > <%= link_to theme.name, theme %> > 
     	<% subtheme = Word.find(params[:id]) .subtheme %>
-      <%= link_to subtheme.name_english, subtheme %> > 
+      <%= link_to subtheme.name, subtheme %> > 
     	<% word = Word.find(params[:id]) %>
-      <%= link_to word.name_english, word %>
+      <%= link_to word.name, word %>
 
     	<%# word = Word.find(params[:id]) %>
     	<!-- 

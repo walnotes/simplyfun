@@ -12,10 +12,13 @@
         <p>
         	<ul>
           	<% @subtheme.words.each do |w| %>
-              <!-- <li><%#= link_to w.name, word_path(w) %><br/><%= image_tag w.image, width: '100' %></li> -->
-            	<div style="display:inline-block;width:100px;">
-              	<div style="width:100px;text-align:center;margin-left:10px;"><%= link_to w.name, word_path(w) %></div>
-                <%= image_tag w.image, width: '100' %>
+            	<div style="display:inline-block;width:110px;">
+              	<div style="width:100px;text-align:center;margin-left:10px;">
+                	<%= link_to word_path(w) do %>
+                    <%= w.name_english %>
+                    <br/><span style="font-size:11px"><%= w.name %></span></div>
+                    <%= image_tag w.image, width: '100' %>
+                  <% end %>
             	</div>
           	<% end %>
         	</ul>

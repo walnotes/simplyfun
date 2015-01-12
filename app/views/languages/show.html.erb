@@ -7,21 +7,15 @@
         	<h1><%= language.name_english %></h1>
         <% end %>
         <p>Select a theme</p>
-        <!--
-        <p>
-        	<ul>
-          	<% @language.themes.each do |t| %>
-          		<li><%= link_to t.name, theme_path(t) %></li>
-          	<% end %>
-        	</ul>
-        </p>
-        <hr/>
-        -->
         <p>
         	<% @language.themes.each do |t| %>
           	<div style="display:inline-block;width:200px;">
-            	<div style="width:200px;text-align:center;margin-left:10px;"><%= link_to t.name, theme_path(t) %></div>
-              <%= image_tag t.image, width: '200' %>
+            	<div style="width:200px;text-align:center;margin-left:10px;">
+            	<%= link_to theme_path(t) do %>
+                <%= t.name_english %>
+                <span style="font-size:11px"><%= t.name %></span></div>
+                <%= image_tag t.image, width: '200' %>
+              <% end %>
           	</div>
         	<% end %>
         </p>

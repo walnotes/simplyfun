@@ -19,6 +19,8 @@
   <!-- Nav Topbar -->
   <%= render '/layouts/top_bar' %>
 
+  <hr>
+
   <!-- Main Content Section -->
   <%= render '/layouts/breadcrumb' %>
 
@@ -30,6 +32,9 @@
     	<%= yield %>
     </div>
   </div>
+
+  <!-- Breadcrumb -->
+  <%= render '/layouts/breadcrumb_translated' %>
 
   <!-- Footer -->
   <%= render '/layouts/footer' %>
