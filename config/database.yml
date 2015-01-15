@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: sfs_languages_development
   pool: 5
-  username: cosmos
+  username: walter
   password:
 
 test:
@@ -11,8 +11,27 @@ test:
   encoding: unicode
   database: sfs_languages_test
   pool: 5
-  username: cosmos
+  username: walter
   password:
+
+# This was username:walter for local development and username:cosmo in the previous repo. -WK2015Jan15
+## START PREVIOUSLY WORKING VERSION
+# development:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: sfs_languages_development
+#   pool: 5
+#   username: walter
+#   password:
+# 
+# test:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: sfs_languages_test
+#   pool: 5
+#   username: walter
+#   password:
+## END PREVIOUSLY WORKING VERSION
 
 # # SQLite version 3.x
 # #   gem install sqlite3
